@@ -1,18 +1,27 @@
 import { useLocalStorage } from "../hooks/useLocalStorage";
-function Form() {
 
-    return (
-      <>
-        <form style={{ display: "flex", flexDirection: "column" }}>
-            <label htmlFor="name">Name:</label>
-            <input type="text" data-testid={"name"} />
-            <label htmlFor="service">Service Number:</label>
-            <input type="text" data-testid={"service"} />
+export default function Form() {
+	const [name, setName] = useLocalStorage("name");
+	const [serviceNumber, setServiceNumber] = useLocalStorage("serviceNumber");
 
-        </form>
-        <h4>{name ? `Welcome, ${name}!` : "Enter your name"}</h4>
-      </>
-    );
+	return (
+		<form>
+			<label htmlFor="name">Name</label>
+			<input
+				id="name"
+				data-testid="name"
+				placeholder="Enter your name"
+				value={name ?? ""}
+				onChange={(event) => setName(event.target.value)}
+			/>
+
+			<label htmlFor="serviceNumber">Service number</label>
+			<input
+				id="serviceNumber"
+				data-testid="serviceNumber"
+				value={serviceNumber ?? ""}
+				onChange={(event) => setServiceNumber(event.target.value)}
+			/>
+		</form>
+	);
 }
-
-export default Form
